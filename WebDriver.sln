@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriverCore", "WebDriver\WebDriverCore.csproj", "{6AF7C978-44D8-4AFF-9BEF-75873F76BAFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriverTests", "WebDriverTests\WebDriverTests.csproj", "{35688340-314C-43D1-976B-6F7CB3F0E230}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AF7C978-44D8-4AFF-9BEF-75873F76BAFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AF7C978-44D8-4AFF-9BEF-75873F76BAFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AF7C978-44D8-4AFF-9BEF-75873F76BAFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AF7C978-44D8-4AFF-9BEF-75873F76BAFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35688340-314C-43D1-976B-6F7CB3F0E230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35688340-314C-43D1-976B-6F7CB3F0E230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35688340-314C-43D1-976B-6F7CB3F0E230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35688340-314C-43D1-976B-6F7CB3F0E230}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5542CC17-2CD8-4C80-B115-19D6E918DCF1}
+	EndGlobalSection
+EndGlobal
