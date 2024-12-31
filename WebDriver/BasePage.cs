@@ -1,9 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
-using System;
 
-namespace WebDriver
+namespace WebDriver.Core
 {
     public class BasePage
     {
@@ -13,30 +12,70 @@ namespace WebDriver
         public BasePage(IWebDriver driver)
         {
             Driver = driver;
-            Wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            Wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
         }
 
-        // Переход на главную страницу
-        public void NavigateToHomePage()
+        protected IWebElement WaitForElement(By by)
         {
-            Driver.Navigate().GoToUrl("https://www.epam.com/");
-
-            // Ожидание и клик по кнопке согласия с cookies
-            WaitForElementToBeClickable(By.CssSelector("button.accept-cookies")).Click();
+            return Wait.Until(ExpectedConditions.ElementExists(by));
         }
 
-        // Метод для поиска элемента с ожиданием
-        protected IWebElement FindElement(By locator)
+        protected IWebElement WaitForElementToBeClickable(By by)
         {
-            return Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
+            return Wait.Until(ExpectedConditions.ElementToBeClickable(by));
         }
 
-        // Метод для кликабельности элемента
-        protected IWebElement WaitForElementToBeClickable(By locator)
+        protected void WaitForPageLoad()
         {
-            return Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator));
+            Wait.Until(driver => ((IJavaScriptExecutor)driver)
+                .ExecuteScript("return document.readyState").Equals("complete"));
+            Thread.Sleep(1000);
+        }
+
+        protected void ScrollToElement(IWebElement element)
+        {
+            try
+            {
+                ((IJavaScriptExecutor)Driver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
+                System.Threading.Thread.Sleep(500);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Scroll error: {ex.Message}");
+            }
+        }
+
+        protected void ClickElement(IWebElement element)
+        {
+            try
+            {
+                ScrollToElement(element);
+                element.Click();
+            }
+            catch
+            {
+                ((IJavaScriptExecutor)Driver).ExecuteScript("arguments[0].click();", element);
+            }
+        }
+
+        protected void SendKeys(IWebElement element, string text)
+        {
+            ScrollToElement(element);
+            element.Clear();
+            element.SendKeys(text);
+        }
+
+        protected bool IsElementDisplayed(By by, int timeoutInSeconds = 10)
+        {
+            try
+            {
+                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                return wait.Until(ExpectedConditions.ElementIsVisible(by)).Displayed;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
-
-

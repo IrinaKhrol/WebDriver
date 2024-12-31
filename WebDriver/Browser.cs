@@ -1,36 +1,34 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
 
 namespace WebDriver
 {
-    public static class Browser
+    public class Browser
     {
-        private static IWebDriver _driver;
+        private static IWebDriver? _driver;
 
-        public static IWebDriver Driver
+        public static IWebDriver GetDriver()
         {
-            get
+            if (_driver == null)
             {
-                if (_driver == null)
-                {
-                    Initialize();
-                }
-                return _driver;
+                var options = new ChromeOptions();
+                options.AddArguments(
+                    "--start-maximized",
+                    "--disable-notifications",
+                    "--disable-logging",
+                    "--disable-gpu",
+                    "--no-sandbox",
+                    "--disable-dev-shm-usage"
+                );
+
+                _driver = new ChromeDriver(options);
+                _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
             }
+            return _driver;
         }
 
-        public static void Initialize()
-        {
-            var options = new ChromeOptions();
-            options.AddArgument("--start-maximized");
-
-            _driver = new ChromeDriver(options);
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-
-        }
-
-        public static void Quit()
+        public static void QuitDriver()
         {
             _driver?.Quit();
             _driver = null;

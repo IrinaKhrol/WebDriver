@@ -1,25 +1,43 @@
 ﻿using OpenQA.Selenium;
-using System.Collections.Generic;
+using WebDriver.Core;
 
-namespace WebDriver
+namespace WebDriver.Pages
 {
     public class SearchPage : BasePage
     {
-        public SearchPage(IWebDriver driver) : base(driver) { }
+        private readonly By _searchInput = By.CssSelector(".header-search__input");
+        private readonly By _findButton = By.CssSelector("button.custom-search-button");
+        private readonly By _searchResults = By.CssSelector(".search-results__title-link");
 
-        private IWebElement SearchInput => FindElement(By.XPath("//input[@id='new_form_search']"));
-        private IWebElement FindButton => FindElement(By.PartialLinkText("Find"));
-        private IList<IWebElement> SearchResults => Driver.FindElements(By.CssSelector(".search-results__item-link"));
+        public SearchPage(IWebDriver driver) : base(driver) { }
 
         public void PerformSearch(string searchTerm)
         {
-            SearchInput.SendKeys(searchTerm);
-            FindButton.Click();
+            var searchField = WaitForElement(_searchInput);
+            SendKeys(searchField, searchTerm);
+
+            var searchButton = WaitForElement(_findButton);
+            ClickElement(searchButton);
+            WaitForPageLoad();
         }
 
         public bool AreSearchResultsPresent()
         {
-            return SearchResults.Count > 0;
+            return IsElementDisplayed(_searchResults);
+        }
+
+        public bool ValidateSearchResults(string searchTerm)
+        {
+            var results = Driver.FindElements(_searchResults)
+                .Select(e => e.Text.ToUpper())
+                .ToList();
+
+            return results.Any() && results.All(text => text.Contains(searchTerm.ToUpper()));
+        }
+        public IList<IWebElement> GetSearchResults()
+        {
+            var results = Driver.FindElements(_searchResults);
+            return results.ToList();
         }
     }
 }

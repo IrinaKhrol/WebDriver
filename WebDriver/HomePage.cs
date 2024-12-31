@@ -1,26 +1,43 @@
 ﻿using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
+using WebDriver.Core;
 
 namespace WebDriver
 {
     public class HomePage : BasePage
     {
-        public HomePage(IWebDriver driver) : base(driver)
+        private readonly By _cookieAcceptButton = By.XPath("//*[@id=\"onetrust-accept-btn-handler\"]");
+        private readonly By _careersLink = By.XPath("//a[contains(@href,'careers') and @class='top-navigation__item-link js-op']");
+        private readonly By _searchButton = By.CssSelector("button.header-search__button");
+
+        public HomePage(IWebDriver driver) : base(driver) { }
+
+        public void NavigateToHomePage()
         {
+            Driver.Navigate().GoToUrl("https://www.epam.com/");
+            AcceptCookies();
         }
 
-        private IWebElement CareersLink => FindElement(By.XPath("/ html / body / div / div[2] / div[2] / div[1] / header / div / div / nav / ul / li[5] / span[1] / a"));
-        private IWebElement SearchButton => FindElement(By.CssSelector("button.search-icon"));
+        private void AcceptCookies()
+        {
+            try
+            {
+                var cookieButton = WaitForElementToBeClickable(_cookieAcceptButton);
+                ClickElement(cookieButton);
+            }
+            catch { /* Cookie banner might not be present */ }
+        }
 
         public void ClickCareers()
         {
-            CareersLink.Click();
+            var careersLink = WaitForElementToBeClickable(_careersLink);
+            ClickElement(careersLink);
+            WaitForPageLoad();
         }
 
-        public void ClickSearch()
+        public void InitiateSearch()
         {
-            SearchButton.Click();
+            var searchButton = WaitForElementToBeClickable(_searchButton);
+            ClickElement(searchButton);
         }
     }
 }
-
