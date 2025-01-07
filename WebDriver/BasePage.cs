@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
@@ -42,6 +43,24 @@ namespace WebDriver.Core
             catch (Exception ex)
             {
                 Console.WriteLine($"Scroll error: {ex.Message}");
+            }
+        }
+
+        protected void ScrollUsingWheel(IWebElement element)
+        {
+            try
+            {
+                Actions actions = new Actions(Driver);
+                actions.MoveToElement(element)
+                       .SendKeys(Keys.PageDown)
+                       .Build()
+                       .Perform();
+                Thread.Sleep(1000);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Scroll error: {ex.Message}");
+                ((IJavaScriptExecutor)Driver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
             }
         }
 
