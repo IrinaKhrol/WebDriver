@@ -1,50 +1,40 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using WebDriverCore.Core.Browser;
+using WebDriverCore.Core.Logging;
 
 namespace WebDriver
 {
     public class Browser
     {
         private static IWebDriver? _driver;
+        private static readonly IBrowserFactory _browserFactory = BrowserFactory.Instance;
 
         public static IWebDriver GetDriver(bool headless = false)
         {
             if (_driver == null)
             {
-                var options = new ChromeOptions();
-                string downloadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
-                options.AddUserProfilePreference("download.default_directory", downloadPath);
-                if (headless)
+                try
                 {
-                    options.AddArgument("--headless=new");
-                    options.AddArgument("--window-size=1920,1080");
-                    options.AddArgument("--disable-extensions");
-                    options.AddArgument("--proxy-server='direct://'");
-                    options.AddArgument("--proxy-bypass-list=*");
+                    LoggerManager.LogInfo("Initializing browser");
+                    _driver = _browserFactory.CreateDriver(headless);
                 }
-
-                options.AddArguments(
-                    "--start-maximized",
-                    "--disable-notifications",
-                    "--disable-logging",
-                    "--disable-gpu",
-                    "--no-sandbox",
-                    "--disable-dev-shm-usage",
-                    "--ignore-certificate-errors"
-                );
-
-                _driver = new ChromeDriver(options);
-                _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-                _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
-                _driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(30);
+                catch (Exception ex)
+                {
+                    LoggerManager.LogError("Failed to initialize browser", ex);
+                    throw;
+                }
             }
             return _driver;
         }
 
         public static void QuitDriver()
         {
-            _driver?.Quit();
-            _driver = null;
+            if (_driver != null)
+            {
+                LoggerManager.LogInfo("Quitting browser");
+                _browserFactory.QuitDriver(_driver);
+                _driver = null;
+            }
         }
     }
 }

@@ -1,0 +1,22 @@
+{
+  "Browser": {
+    "Type": "Chrome",
+    "Headless": false,
+    "Timeout": {
+      "PageLoad": 30,
+      "ImplicitWait": 10,
+      "ExplicitWait": 30
+    }
+  },
+  "Environment": {
+    "URL": "https://www.epam.com",
+    "DownloadPath": "Downloads",
+    "ScreenshotPath": "Screenshots",
+    "LogsPath": "Logs"
+  },
+  "Logging": {
+    "MinLevel": "Debug",
+    "EnableConsoleLogging": true,
+    "EnableFileLogging": true
+  }
+}

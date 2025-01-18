@@ -1,7 +1,6 @@
 ﻿using OpenQA.Selenium;
-using WebDriver.Core;
 
-namespace WebDriver
+namespace WebDriverCore.Business
 {
     public class HomePage : BasePage
     {
