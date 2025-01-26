@@ -88,7 +88,8 @@ namespace WebDriverCore.Business
             try
             {
                 LoggerManager.LogInfo("Scrolling to element");
-                ((IJavaScriptExecutor)Driver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
+                ((IJavaScriptExecutor)Driver).ExecuteScript("arguments[0].scrollIntoView({block: 'center'});", element);
+
                 Thread.Sleep(500);
             }
             catch (Exception)

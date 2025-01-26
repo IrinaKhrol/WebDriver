@@ -38,8 +38,8 @@ namespace WebDriverCore.Core.Browser
                 );
 
                 var driver = new ChromeDriver(options);
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-                driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+                driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60);
 
                 LoggerManager.LogInfo("Chrome driver created successfully");
                 return driver;

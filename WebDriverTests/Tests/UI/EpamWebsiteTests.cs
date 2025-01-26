@@ -1,11 +1,12 @@
-﻿using OpenQA.Selenium.Support.UI;
+﻿using NUnit.Framework;
+using OpenQA.Selenium.Support.UI;
 using WebDriverCore.Business;
 using WebDriverCore.Core.Logging;
 using WebDriverTests.Tests.Base;
 
 namespace WebDriverTests.Tests.UI
 {
-    [TestClass]
+    [TestFixture]
     public class EpamWebsiteTests : BaseTest
     {
         private HomePage? _homePage;
@@ -14,7 +15,7 @@ namespace WebDriverTests.Tests.UI
         private AboutPage? _aboutPage;
         private InsightsPage? _insightsPage;
 
-        [TestInitialize]
+        [SetUp]
         public override void TestInitialize()
         {
             base.TestInitialize();
@@ -26,10 +27,10 @@ namespace WebDriverTests.Tests.UI
             LoggerManager.LogInfo("Test pages initialized");
         }
 
-        [TestMethod]
-        [DataRow("Python")]
-        [DataRow("Java")]
-        [DataRow("C#")]
+        [Test]
+        [TestCase("Python")]
+        [TestCase("Java")]
+        [TestCase("C#")]
         public void Test1_SearchJobAndValidatePosition(string programLanguage)
         {
             try
@@ -39,7 +40,7 @@ namespace WebDriverTests.Tests.UI
                 _homePage?.ClickCareers();
                 _careersPage?.SearchJob(programLanguage);
 
-                Assert.IsTrue(_careersPage?.IsJobFound(programLanguage),
+                NUnit.Framework.Assert.That(_careersPage?.IsJobFound(programLanguage), Is.True,
                     $"No results found for {programLanguage}");
                 LoggerManager.LogInfo($"Job search test completed successfully for {programLanguage}");
             }
@@ -50,10 +51,10 @@ namespace WebDriverTests.Tests.UI
             }
         }
 
-        [TestMethod]
-        [DataRow("BLOCKCHAIN")]
-        [DataRow("Cloud")]
-        [DataRow("Automation")]
+        [Test]
+        [TestCase("BLOCKCHAIN")]
+        [TestCase("Cloud")]
+        [TestCase("Automation")]
         public void Test2_ValidateGlobalSearch(string searchTerm)
         {
             try
@@ -67,7 +68,7 @@ namespace WebDriverTests.Tests.UI
                 var anyResultContainsSearchTerm = searchResults?.Any(result =>
                     result.Text.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
 
-                Assert.IsTrue(anyResultContainsSearchTerm,
+                NUnit.Framework.Assert.That(anyResultContainsSearchTerm, Is.True,
                     $"No result contains '{searchTerm}'");
                 LoggerManager.LogInfo($"Global search test completed successfully for {searchTerm}");
             }
@@ -78,8 +79,8 @@ namespace WebDriverTests.Tests.UI
             }
         }
 
-        [TestMethod]
-        [DataRow("EPAM_Corporate_Overview_Q4_EOY.pdf")]
+        [Test]
+        [TestCase("EPAM_Corporate_Overview_Q4_EOY.pdf")]
         public void Test3_ValidateFileDownload(string fileName)
         {
             try
@@ -111,8 +112,7 @@ namespace WebDriverTests.Tests.UI
                 var downloadedFile = Directory.GetFiles(downloadPath, pattern)
                     .FirstOrDefault(file => file.StartsWith(filePath.Substring(0, filePath.LastIndexOf('.'))));
 
-                bool isFileDownloaded = downloadedFile != null;
-                Assert.IsTrue(isFileDownloaded, $"File {fileName} was not downloaded");
+                NUnit.Framework.Assert.That(downloadedFile, Is.Not.Null, $"File {fileName} was not downloaded");
                 LoggerManager.LogInfo("File download test completed successfully");
             }
             catch (Exception ex)
@@ -122,7 +122,7 @@ namespace WebDriverTests.Tests.UI
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Test4_ValidateArticleTitle()
         {
             try
@@ -139,7 +139,7 @@ namespace WebDriverTests.Tests.UI
                 string articleTitle = _insightsPage?.GetArticleTitle() ?? string.Empty;
                 LoggerManager.LogInfo($"Article title: {articleTitle}");
 
-                Assert.AreEqual(carouselTitle, articleTitle,
+                NUnit.Framework.Assert.That(articleTitle, Is.EqualTo(carouselTitle),
                     "Article title does not match with carousel title");
                 LoggerManager.LogInfo("Article title validation test completed successfully");
             }

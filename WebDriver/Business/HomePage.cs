@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using WebDriverCore.Core.Logging;
 
 namespace WebDriverCore.Business
 {
@@ -14,8 +15,19 @@ namespace WebDriverCore.Business
 
         public void NavigateToHomePage()
         {
-            Driver.Navigate().GoToUrl("https://www.epam.com/");
-            AcceptCookies();
+            try
+            {
+                LoggerManager.LogInfo("Navigating to home page");
+                Driver.Navigate().GoToUrl("https://www.epam.com/");
+                WaitForPageLoad();
+                AcceptCookies();
+                LoggerManager.LogInfo("Successfully navigated to home page");
+            }
+            catch (Exception ex)
+            {
+                LoggerManager.LogError($"Failed to navigate to home page: {ex.Message}");
+                throw;
+            }
         }
 
         private void AcceptCookies()
@@ -53,6 +65,21 @@ namespace WebDriverCore.Business
             var insightsLink = WaitForElementToBeClickable(_insightsLink);
             ClickElement(insightsLink);
             WaitForPageLoad();
+        }
+
+        public void ClickServices()
+        {
+            try
+            {
+                var servicesLink = WaitForElementToBeClickable(By.CssSelector("a[href*='services'].top-navigation__item-link"));
+                ClickElement(servicesLink);
+                LoggerManager.LogInfo("Clicked on Services link");
+            }
+            catch (Exception ex)
+            {
+                LoggerManager.LogError($"Failed to click Services: {ex.Message}");
+                throw;
+            }
         }
     }
 }
