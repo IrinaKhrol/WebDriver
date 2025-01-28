@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebDriverCore", "WebDriver\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebDriverTests", "WebDriverTests\WebDriverTests.csproj", "{35688340-314C-43D1-976B-6F7CB3F0E230}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDD", "BDD\BDD.csproj", "{4E504197-8C25-417E-93AF-48394BDE8447}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BDD", "BDD\BDD.csproj", "{4E504197-8C25-417E-93AF-48394BDE8447}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriver.API", "WebDriver.API\WebDriver.API.csproj", "{5C0AC76C-EDD8-4933-8F40-C4931BABF76C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{4E504197-8C25-417E-93AF-48394BDE8447}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E504197-8C25-417E-93AF-48394BDE8447}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E504197-8C25-417E-93AF-48394BDE8447}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C0AC76C-EDD8-4933-8F40-C4931BABF76C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C0AC76C-EDD8-4933-8F40-C4931BABF76C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C0AC76C-EDD8-4933-8F40-C4931BABF76C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C0AC76C-EDD8-4933-8F40-C4931BABF76C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
