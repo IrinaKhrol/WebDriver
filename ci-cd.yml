@@ -3,7 +3,7 @@ name: CI/CD-Pipeline
 on:
   pull_request:
     branches: 
-      - master
+      - feature/ci-cd-setup
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
