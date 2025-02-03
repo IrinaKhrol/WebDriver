@@ -1,11 +1,11 @@
 ﻿using NUnit.Framework;
-using WebDriver.API.Core;
-using WebDriver.API.Business.Models;
-using WebDriver.API.Core.Logging;
+using WebDriverAPI.Core;
+using WebDriverAPI.Business.Models;
+using WebDriverAPI.Core.Logging;
 using RestSharp;
 using System.Net;
 
-namespace WebDriver.API.Tests
+namespace WebDriverAPI.Tests
 {
     [TestFixture]
     [Category("API")]
