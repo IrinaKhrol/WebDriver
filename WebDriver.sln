@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BDD", "BDD\BDD.csproj", "{4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebDriver.API", "WebDriver.API\WebDriver.API.csproj", "{5C0AC76C-EDD8-4933-8F40-C4931BABF76C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{542C3672-AD3C-4F5F-9C77-CECC7BDB55C8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{352B6BBC-19D9-4F4F-987D-E562AE406078}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{D86D3A69-B1BB-4FAF-86FD-F550A39537F5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{B70FF58E-9B6B-4991-B160-23406AB7D921}"
 	ProjectSection(SolutionItems) = preProject
 		ci-cd.yml = ci-cd.yml
 	EndProjectSection
@@ -45,7 +45,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D86D3A69-B1BB-4FAF-86FD-F550A39537F5} = {542C3672-AD3C-4F5F-9C77-CECC7BDB55C8}
+		{B70FF58E-9B6B-4991-B160-23406AB7D921} = {352B6BBC-19D9-4F4F-987D-E562AE406078}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5542CC17-2CD8-4C80-B115-19D6E918DCF1}
