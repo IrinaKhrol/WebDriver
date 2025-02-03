@@ -40,7 +40,7 @@ jobs:
 
     - name: Run API Tests
       run: dotnet test WebDriver.API/WebDriver.API.csproj --filter Category=API --no-build
-      working-directory: WebDriver.API
+      working-directory:  .
 
     - name: Run UI Tests
       if: always()
