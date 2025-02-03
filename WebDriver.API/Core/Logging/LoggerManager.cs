@@ -1,6 +1,6 @@
 ﻿using NLog;
 
-namespace WebDriver.API.Core.Logging
+namespace WebDriverAPI.Core.Logging
 {
     public static class LoggerManager
     {

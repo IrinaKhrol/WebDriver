@@ -1,4 +1,4 @@
-﻿namespace WebDriver.API.Business.Models
+﻿namespace WebDriverAPI.Business.Models
 {
     public class UserModel
     {

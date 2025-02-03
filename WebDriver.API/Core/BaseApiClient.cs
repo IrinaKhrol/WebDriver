@@ -1,6 +1,6 @@
 ﻿using RestSharp;
 
-namespace WebDriver.API.Core
+namespace WebDriverAPI.Core
 {
     public class BaseApiClient
     {
