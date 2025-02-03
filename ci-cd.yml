@@ -39,7 +39,7 @@ jobs:
       working-directory: .
 
     - name: Run API Tests
-      run: dotnet test WebDriver.API --filter Category=API --no-build
+      run: dotnet test WebDriver.API/WebDriver.API.csproj --filter Category=API --no-build
       working-directory: .
 
     - name: Run UI Tests
