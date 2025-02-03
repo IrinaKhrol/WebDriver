@@ -1,0 +1,60 @@
+name: CI/CD-Pipeline
+
+on:
+  pull_request:
+    branches: 
+      - feature/ci-cd-setup
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: 'Browser for UI tests'
+        required: true
+        default: 'chrome'
+        type: choice
+        options:
+          - chrome
+          - edge
+
+jobs:
+  build-and-test:
+    name: Build and Tests
+    runs-on: windows-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+      working-directory: .
+
+    - name: Build
+      run: dotnet build --no-restore
+      working-directory: .
+
+    - name: Run API Tests
+      run: dotnet test WebDriverAPI --filter Category=API --no-build
+      working-directory: .
+
+    - name: Run UI Tests
+      if: always()
+      run: dotnet test WebDriverTests --filter Category=UI --no-build
+      env:
+        BROWSER: ${{ github.event.inputs.browser || 'chrome' }}
+      working-directory: .
+
+    - name: Publish Test Results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: |
+          **/TestResults
+          **/Screenshots
+          **/*.trx

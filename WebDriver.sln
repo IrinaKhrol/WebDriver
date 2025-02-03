@@ -3,9 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriverCore", "WebDriver\WebDriverCore.csproj", "{6AF7C978-44D8-4AFF-9BEF-75873F76BAFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebDriverCore", "WebDriver\WebDriverCore.csproj", "{6AF7C978-44D8-4AFF-9BEF-75873F76BAFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriverTests", "WebDriverTests\WebDriverTests.csproj", "{35688340-314C-43D1-976B-6F7CB3F0E230}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebDriverTests", "WebDriverTests\WebDriverTests.csproj", "{35688340-314C-43D1-976B-6F7CB3F0E230}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BDD", "BDD\BDD.csproj", "{4E504197-8C25-417E-93AF-48394BDE8447}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebDriver.API", "WebDriver.API\WebDriver.API.csproj", "{5C0AC76C-EDD8-4933-8F40-C4931BABF76C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{352B6BBC-19D9-4F4F-987D-E562AE406078}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{B70FF58E-9B6B-4991-B160-23406AB7D921}"
+	ProjectSection(SolutionItems) = preProject
+		ci-cd.yml = ci-cd.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +32,20 @@ Global
 		{35688340-314C-43D1-976B-6F7CB3F0E230}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35688340-314C-43D1-976B-6F7CB3F0E230}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35688340-314C-43D1-976B-6F7CB3F0E230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E504197-8C25-417E-93AF-48394BDE8447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E504197-8C25-417E-93AF-48394BDE8447}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E504197-8C25-417E-93AF-48394BDE8447}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E504197-8C25-417E-93AF-48394BDE8447}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C0AC76C-EDD8-4933-8F40-C4931BABF76C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C0AC76C-EDD8-4933-8F40-C4931BABF76C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C0AC76C-EDD8-4933-8F40-C4931BABF76C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C0AC76C-EDD8-4933-8F40-C4931BABF76C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B70FF58E-9B6B-4991-B160-23406AB7D921} = {352B6BBC-19D9-4F4F-987D-E562AE406078}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5542CC17-2CD8-4C80-B115-19D6E918DCF1}

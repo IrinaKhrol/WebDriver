@@ -1,37 +1,40 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using WebDriverCore.Core.Browser;
+using WebDriverCore.Core.Logging;
 
 namespace WebDriver
 {
     public class Browser
     {
         private static IWebDriver? _driver;
+        private static readonly IBrowserFactory _browserFactory = BrowserFactory.Instance;
 
-        public static IWebDriver GetDriver()
+        public static IWebDriver GetDriver(bool headless = false)
         {
             if (_driver == null)
             {
-                var options = new ChromeOptions();
-                options.AddArguments(
-                    "--start-maximized",
-                    "--disable-notifications",
-                    "--disable-logging",
-                    "--disable-gpu",
-                    "--no-sandbox",
-                    "--disable-dev-shm-usage"
-                );
-
-                _driver = new ChromeDriver(options);
-                _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-                _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
+                try
+                {
+                    LoggerManager.LogInfo("Initializing browser");
+                    _driver = _browserFactory.CreateDriver(headless);
+                }
+                catch (Exception ex)
+                {
+                    LoggerManager.LogError("Failed to initialize browser", ex);
+                    throw;
+                }
             }
             return _driver;
         }
 
         public static void QuitDriver()
         {
-            _driver?.Quit();
-            _driver = null;
+            if (_driver != null)
+            {
+                LoggerManager.LogInfo("Quitting browser");
+                _browserFactory.QuitDriver(_driver);
+                _driver = null;
+            }
         }
     }
 }

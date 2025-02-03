@@ -1,7 +1,6 @@
 ﻿using OpenQA.Selenium;
-using WebDriver.Core;
 
-namespace WebDriver.Pages
+namespace WebDriverCore.Business
 {
     public class SearchPage : BasePage
     {
