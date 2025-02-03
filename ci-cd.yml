@@ -23,10 +23,10 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '6.0.x'
 
@@ -39,7 +39,7 @@ jobs:
       working-directory: .
 
     - name: Run API Tests
-      run: dotnet test WebDriverAPI --filter Category=API --no-build
+      run: dotnet test WebDriver.API --filter Category=API --no-build
       working-directory: .
 
     - name: Run UI Tests
